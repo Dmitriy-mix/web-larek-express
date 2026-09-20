@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { faker } from '@faker-js/faker';
 import Product from '../models/product';
 import BadRequestError from '../errors/bad-request-error';
-import NotFoundError from '../errors/not-found-error';
 
 interface IOrderRequest {
   payment: 'card' | 'online';
