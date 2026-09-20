@@ -49,7 +49,7 @@ const createOrder = async (
 
     // 6. Проверяем, что все товары найдены
     if (products.length !== items.length) {
-      throw new NotFoundError('Некоторые товары не найдены');
+      throw new BadRequestError('Некоторые товары не найдены');
     }
 
     // 7. Проверяем, что у всех товаров есть цена (товар продаётся)
@@ -66,7 +66,7 @@ const createOrder = async (
 
     // 9. Генерируем ID и возвращаем ответ
     const orderId = faker.string.uuid();
-    res.status(201).json({
+    res.status(200).json({
       id: orderId,
       total: calculatedTotal,
     });
