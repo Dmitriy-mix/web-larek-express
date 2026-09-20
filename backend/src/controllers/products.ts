@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Product, { IProduct } from '../models/product';
 
-export const getProducts = async (req: Request, res: Response, next: NextFunction) => {
+export const getProducts = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const products = await Product.find({});
     res.json({ items: products, total: products.length });

@@ -4,7 +4,6 @@ import Product from '../models/product';
 import BadRequestError from '../errors/bad-request-error';
 import NotFoundError from '../errors/not-found-error';
 
-
 interface IOrderRequest {
   payment: 'card' | 'online';
   email: string;
@@ -14,13 +13,15 @@ interface IOrderRequest {
   items: string[];
 }
 
-export const createOrder = async (
+const createOrder = async (
   req: Request<{}, {}, IOrderRequest>,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const { payment, email, phone, address, total, items } = req.body;
+    const {
+      payment, email, phone, address, total, items,
+    } = req.body;
 
     // 1. Проверка обязательных полей
     if (!payment || !email || !phone || !address || !items || !total) {
@@ -73,3 +74,5 @@ export const createOrder = async (
     next(err);
   }
 };
+
+export default createOrder;

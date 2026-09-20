@@ -6,7 +6,7 @@ interface IError extends Error {
   code?: number;
 }
 
-export default (err: IError, req: Request, res: Response, _next: NextFunction) => {
+export default (err: IError, _req: Request, res: Response, _next: NextFunction) => {
   // 1. Валидация Mongoose → 400
   if (err instanceof MongooseError.ValidationError) {
     return res.status(400).json({ message: err.message });
