@@ -2,12 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
+import { errors } from 'celebrate';
+
 import router from './routes';
 import errorHandler from './middlewares/error-handler';
 import NotFoundError from './errors/not-found-error';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import { PORT, DB_ADDRESS, ORIGIN_ALLOW } from './config';
-import { errors } from 'celebrate';
 
 
 const app = express();
