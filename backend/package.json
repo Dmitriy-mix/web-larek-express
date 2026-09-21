@@ -1,7 +1,7 @@
 {
   "name": "weblarek_backend",
   "version": "1.0.0",
-  "description": "< Добавьте описание проекта в свободной форме >",
+  "description": "weblarek-backend",
   "main": "dist/app.js",
   "scripts": {
     "lint": "npx eslint src/**/*.ts",
