@@ -16,23 +16,24 @@ app.use(cors({ origin: ORIGIN_ALLOW }));
 app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
-// 1. Логгер запросов — ДО всех роутов
+// 1. Логгер запросов — ДО роутов
 app.use(requestLogger);
 
+// 2. Роуты
 app.use(router);
 
-// 2. Логгер ошибок — ПОСЛЕ роутов, но ДО обработчиков ошибок
-app.use(errorLogger);
-
-// 3. Обработчик ошибок celebrate
-app.use(errors());
-
-// 4. 404 — маршрут не найден
-app.use((req, res, next) => {
+// 3. 404 — ПОСЛЕ роутов, ДО логгера ошибок
+app.use((_req, res, next) => {
   next(new NotFoundError('Маршрут не найден'));
 });
 
-// 5. Централизованный обработчик — последний
+// 4. Обработчик ошибок celebrate
+app.use(errors());
+
+// 5. Логгер ошибок — ПОСЛЕ всего, что может бросить ошибку
+app.use(errorLogger);
+
+// 6. Централизованный обработчик — последний
 app.use(errorHandler);
 
 mongoose.connect(DB_ADDRESS)
